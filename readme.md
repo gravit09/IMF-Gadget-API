@@ -2,6 +2,10 @@
 
 A RESTful API for managing IMF gadgets and agents.
 
+## Live API
+
+The API is deployed and accessible at: [https://imf-gadget-api-mtb5.onrender.com](https://imf-gadget-api-mtb5.onrender.com)
+
 ## API Routes
 
 ### Authentication Routes
@@ -32,7 +36,9 @@ All gadget-related endpoints require authentication. Include the JWT token in th
 Authorization: Bearer <your-token>
 ```
 
-## Setup
+## Local Development
+
+### Setup
 
 1. Install dependencies:
 
@@ -46,11 +52,31 @@ npm install
 npm start
 ```
 
-## Docker Support
+### Docker Support
 
 The application can be run using Docker:
 
 ```bash
 docker build -t imf-gadget-api .
 docker run -p 3000:3000 imf-gadget-api
+```
+
+## API Testing
+
+You can test the API endpoints using tools like Postman or cURL. Here's an example using cURL:
+
+```bash
+# Register a new member
+curl -X POST https://imf-gadget-api-mtb5.onrender.com/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username": "ethan", "password": "hunt123"}'
+
+# Login
+curl -X POST https://imf-gadget-api-mtb5.onrender.com/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "ethan", "password": "hunt123"}'
+
+# Get all gadgets (with authentication)
+curl https://imf-gadget-api-mtb5.onrender.com/gadgets \
+  -H "Authorization: Bearer <your-token>"
 ```
